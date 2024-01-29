@@ -1,18 +1,12 @@
 # Cakes
 
-### GET ALL CAKES
-[GET] 
-```
-localhost:3000/cakes/list
-```
-
-### GET CAKE BY ID
-[GET] 
+##### GET CAKE BY ID
+* [GET] 
 ```
 localhost:3000/cakes/getById?id=10
 ```
 
-### GET CAKE BY NAME
+##### GET CAKE BY NAME
 ```
 [GET] 
 localhost:3000/cakes/getByName?name=tết
