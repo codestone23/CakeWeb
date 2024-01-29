@@ -36,7 +36,6 @@ const ClientsController = {
 
         const name = client.name;
 
-        console.log(namePattern.test(name));
         if(name == null || name == "" || name.length < 6 || name.length > 50 || !namePattern.test(name)) {
             return responseObj(400, "Name is required", null);
         }
@@ -83,7 +82,7 @@ const ClientsController = {
             return responseObj(400, "Address is required", null);
         }
             
-        console.log(ClientsService.updateClient(client));
+        await ClientsService.updateClient(client);
         return responseObj(200, "Success", null);
     },
     deleteClient: async (id) => {

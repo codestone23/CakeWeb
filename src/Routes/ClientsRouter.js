@@ -31,7 +31,6 @@ router.get('/getByPhoneNumber', async (req, res) => {
 });
 router.get('/getByAddress', async (req, res) => {
     const address = req.query.address;
-    console.log(address);
     await ClientsController.getClientByAddress(address).then((result) => {
         res.status(result.status).send(result);
     }); 
@@ -53,7 +52,6 @@ router.post('/update', async (req, res) => {
 
 router.delete('/delete', async (req, res) => {
     const id = req.query.id;
-    console.log(id);
     await ClientsController.deleteClient(id).then((result) => {
         res.status(result.status).send(result);
     });

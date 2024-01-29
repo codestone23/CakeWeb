@@ -18,7 +18,6 @@ router.get('/getById', async (req, res) => {
 
 router.get('/getByName', async (req, res) => {
     const name = req.query.name;
-    console.log(name);
     await CakesController.getCakeByName(name).then((result) => {
         res.status(result.status).send(result);
     });

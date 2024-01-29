@@ -19,17 +19,7 @@ const CakeSizesService = {
             }
         });
         return result;
-    },
-    getPrizeByIdCakeNSize: (id,size) => {
-        const result = CakeSizes(sequelize).findOne({
-            where: {
-                id_cake: id,
-                size: size
-            }
-        });
-        return result;
-    },
-
+    }
 };
 
 export default CakeSizesService;

@@ -26,7 +26,6 @@ router.get('/getByIdClient', async (req, res) => {
 router.get('/getByDeliveryDate', async (req, res) => {
     const startDate = new Date(req.query.startDate);
     const endDate = new Date(req.query.endDate);
-    console.log(startDate,endDate);
     await BillsController.getBillByDeliveryDate(startDate,endDate).then((result) => {
         res.status(result.status).send(result);
     });
@@ -42,7 +41,6 @@ router.get('/getByCreatedDate', async (req, res) => {
 
 router.post('/createTotal', async (req, res) => {
     const bill = req.body;
-    console.log(bill);
     await BillsController.createTotal(bill).then((result) => {
         res.status(result.status).send(result);
     });

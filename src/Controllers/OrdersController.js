@@ -16,7 +16,6 @@ const OrdersController = {
     },
     deleteOrder: async (id) => {
         const order = await OrdersService.getOrderById(id);
-        console.log(order);
         if (order == null) return responseObj(404, "Order is not exist", null);
         try{
             await OrdersService.deleteOrder(id);
