@@ -215,9 +215,9 @@
     display: block;
 }
 #cart {
-    -webkit-animation: cart 0.5s linear;
+    -webkit-animation: cart 0.1s linear;
     transform-origin: top;
-    animation: cart 0.5s linear;
+    animation: cart 0.1s linear;
 }
 @keyframes cart {
     0% {

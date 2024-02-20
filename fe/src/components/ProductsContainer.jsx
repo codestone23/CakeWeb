@@ -8,7 +8,7 @@ const ProductsContainer = () => {
         const fetchData = async () => {
             try {
               const data = await getAllTypes();
-            //   console.log("Type data:", data.data);
+              console.log("Type data:", data.data);
               handleGetTypes(data.data);
             } catch (error) {
               console.error("Error fetching type:", error);

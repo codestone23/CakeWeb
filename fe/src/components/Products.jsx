@@ -13,13 +13,11 @@ const Products = ({type}) => {
     console.log(type.id_type);
     const [slidesPerView, setSlidesPerView] = useState(5);
     const [cakes,setCakes] = useState([]);
-    const [idType,setIdType] = useState(0);
     useEffect(()=>{
-        setIdType(type.id_type);
         const fetchData = async () => {
             try {
-              const data = await getCakesByIdType(idType);
-              console.log("Cakes data:", data.data.data);
+              const data = await getCakesByIdType(type.id_type);
+            //   console.log("Cakes data:", data.data.data);
               handleGetCakes(data.data.data);
             } catch (error) {
               console.error("Error fetching type:", error);
@@ -31,9 +29,7 @@ const Products = ({type}) => {
           };
       
           fetchData();
-    },[type])
-    useEffect(() => {
-        function handleResize() {
+          function handleResize() {
           const windowWidth = window.innerWidth;
           if (windowWidth >= 1508) {
             setSlidesPerView(5);
@@ -50,7 +46,7 @@ const Products = ({type}) => {
         window.addEventListener('resize', handleResize);
         handleResize();
         return () => window.removeEventListener('resize', handleResize);
-      }, []);
+    },[])
   return (
     <div className="category__cake--content">
             <h3 className="category__cake--title">{type.type}</h3>
