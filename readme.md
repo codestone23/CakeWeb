@@ -22,6 +22,20 @@ localhost:3000/cakes/getByIdType?id=0
 
 # -------------------------------------------
 
+# Types
+
+##### [GET] / Get All Types
+```
+localhost:3000/types/list
+```
+
+##### [GET] / Get Type By Id
+```
+localhost:3000/types/getById?id=1
+```
+
+# -------------------------------------------
+
 # Bills
 
 ##### [GET] / Get All Bills

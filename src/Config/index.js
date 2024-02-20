@@ -2,8 +2,8 @@ import Sequelize from 'sequelize';
 
 
 const Connection = async () => {
-    const sequelize = new Sequelize('postgres', 'postgres', 'MyvzEZF$DYt47i4', {
-            host: 'db.anyugtuaguobciopkhcl.supabase.co',
+    const sequelize = new Sequelize('postgres', 'postgres.anyugtuaguobciopkhcl', 'MyvzEZF$DYt47i4', {
+            host: 'aws-0-ap-southeast-1.pooler.supabase.com',
             dialect: 'postgres'
         }
     )

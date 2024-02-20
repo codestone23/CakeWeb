@@ -1,7 +1,7 @@
 import {DataTypes} from 'sequelize';
 
 export const CakeTypes = (sequelize) => sequelize.define('CakeTypes',{
-    id: {
+    id_type: {
         type: DataTypes.BIGINT,
         autoIncrement: true,
         primaryKey: true
