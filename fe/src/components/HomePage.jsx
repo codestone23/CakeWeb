@@ -9,7 +9,7 @@ function HomePage() {
     
   return (
     <main>
-        <Cart />
+    {/* <Cart /> */}
     <section id="intro" className="section--custom1 section__hero">
         <div className="grid wide">
             <div className="row">
@@ -101,11 +101,9 @@ function HomePage() {
             </div>
         </div>
     </section>
-
     <section id="product"  className="section--basic section--bg section__product">
         <ProductsContainer />
     </section>
-
     <section className="section--basic section__chooseus">
         <div className="grid wide">
             <h2 className="section--title">Tại sao bạn nên lựa chọn bánh sinh nhật Cake</h2>
@@ -209,7 +207,6 @@ function HomePage() {
             </div>
         </div>
     </section>
-
     <section className="section--basic section__sale">
         <div className="grid wide">
             <div className="row">
@@ -297,7 +294,6 @@ function HomePage() {
             </div>
         </div>
     </section>
-
     <section className="section--basic section__cta">
         <div className="grid wide">
             <div className="row">
@@ -313,7 +309,6 @@ function HomePage() {
             </div>
         </div>
     </section>
-
     <section className="section--basic section__feedback">
         <div className="grid wide">
             <h2 className="section--title">Phản Hồi</h2>
@@ -374,52 +369,6 @@ function HomePage() {
             </div>
         </div>
     </section>
-    {/* <section className="section--basic section--bg">
-        <div className="grid wide">
-            <h2 className="section--title">Latest News</h2>
-            <div className="row">
-                <div className="col m-6">
-                    <article className="post post-large">
-                        <a href="# " className="post-large__img img--zoom">
-                            <img src="src/assets/images/post-1.jpg" alt="post" />
-                        </a>
-                        <div className="post-large__content">
-                            <time className="post__time">August 9, 2021</time>
-                            <h4 className="post__title">
-                                <a href="# ">How to Pipe a Fluffy Frosting Border on a Cake</a>
-                            </h4>
-                        </div>
-                    </article>
-                </div>
-                <div className="col m-6">
-                    <div className="post__wrap">
-                        <article className="post post-small">
-                            <a href="# " className="post-small__img img--zoom">
-                                <img src="src/assets/images/post-2.jpg" alt="post" />
-                            </a>
-                            <div className="post-small__content">
-                                <time className="post__time">August 9, 2021</time>
-                                <h4 className="post__title">
-                                    <a href="# ">Recipe of the Day: Pumpkin Spice Latte Cake</a>
-                                </h4>
-                            </div>
-                        </article>
-                        <article className="post post-small">
-                            <a href="# " className="post-small__img img--zoom">
-                                <img src="src/assets/images/post-3.jpg" alt="post" />
-                            </a>
-                            <div className="post-small__content">
-                                <time className="post__time">August 9, 2021</time>
-                                <h4 className="post__title">
-                                    <a href="# ">Recipe of the Day: Pumpkin Spice Latte Cake</a>
-                                </h4>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> */}
     <section className="section--custom2 section__partner">
         <div className="grid wide">
             <div className="partner__list">

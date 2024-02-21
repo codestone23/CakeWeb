@@ -73,7 +73,9 @@ const BillsController = {
         const cakeSizes = await CakeSizesService.getAllSize();
         return responseObj(200, "Success", await BillsController.mergerAttributes(bills, orders, cakeSizes));
     },
-    createTotal: async (totalBill) => {
+    createTotal: async (total) => {
+        let totalBill = total.values;
+        console.log(totalBill);
 
          // create client
         const namePattern = /[a-zA-Z]/i;
@@ -91,7 +93,7 @@ const BillsController = {
         }
 
         const phoneNumber = client.phone_number;
-        if(phoneNumber == null || phoneNumber == "" || phoneNumber.length != 10 || !phoneNumberPattern.test(phoneNumber)) {
+        if(phoneNumber == null || phoneNumber == "" || !phoneNumberPattern.test(phoneNumber)) {
             return responseObj(400, "Phone number is required", null);
         }
 

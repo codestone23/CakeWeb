@@ -7,6 +7,5 @@ export async function getAllCakes() {
 }
 
 export async function getCakesByIdType(id_type) {
-    console.log(id_type);
     return await axios.get("http://localhost:3000/cakes/getByIdType?id="+id_type);
 }

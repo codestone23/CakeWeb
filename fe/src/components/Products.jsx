@@ -1,4 +1,3 @@
-import React, { Fragment } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
@@ -7,19 +6,40 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { useEffect, useState } from "react";
 import { getCakesByIdType } from "../services/product";
+import ProductItem from "./ProductItem";
 
-const Products = ({type}) => {
-    console.log(type);
-    console.log(type.id_type);
+const Products = ({handleOpenCart,type}) => {
+    
     const [slidesPerView, setSlidesPerView] = useState(5);
     const [cakes,setCakes] = useState([]);
-    const [idType,setIdType] = useState(0);
+    const handleAddToCart = (cake,quantity,moreInfo) => {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const relCake = cake;
+      relCake["quantity"] = quantity;
+      relCake["moreInfo"] = moreInfo;
+      
+      let first = true;
+      for(let i in cart){
+        console.log({relCake,i});
+        if(cart[i].name === relCake.name && cart[i].moreInfo.size === relCake.moreInfo.size){
+          console.log("oikokoko");
+          let quantityItem = cart[i].quantity + relCake.quantity;
+          cart[i]["quantity"] = quantityItem;
+          first = false;
+          break;
+        }
+      }
+      if (first) {
+        cart.push(relCake);
+      }
+      localStorage.setItem("cart",JSON.stringify(cart));
+      handleOpenCart();
+   }
     useEffect(()=>{
-        setIdType(type.id_type);
         const fetchData = async () => {
             try {
-              const data = await getCakesByIdType(idType);
-              console.log("Cakes data:", data.data.data);
+              const data = await getCakesByIdType(type.id_type);
+            //   console.log("Cakes data:", data.data.data);
               handleGetCakes(data.data.data);
             } catch (error) {
               console.error("Error fetching type:", error);
@@ -31,9 +51,7 @@ const Products = ({type}) => {
           };
       
           fetchData();
-    },[type])
-    useEffect(() => {
-        function handleResize() {
+          function handleResize() {
           const windowWidth = window.innerWidth;
           if (windowWidth >= 1508) {
             setSlidesPerView(5);
@@ -50,7 +68,7 @@ const Products = ({type}) => {
         window.addEventListener('resize', handleResize);
         handleResize();
         return () => window.removeEventListener('resize', handleResize);
-      }, []);
+    },[])
   return (
     <div className="category__cake--content">
             <h3 className="category__cake--title">{type.type}</h3>
@@ -63,42 +81,20 @@ const Products = ({type}) => {
                         pagination
                         onSlideChange={() => console.log('slide change')}
                         >
-                            {cakes?.map((cake,i)=>(
-                                    <SwiperSlide key={i}>
-                                    <div className="product__body">
-                                        <div className="product__body--content">
-                                            <div className="product__image">
-                                                <img className="image__cake" src={cake.list_image[0].image} alt="" />
-                                            </div>
-                                            <div className="product__content">
-                                                <h3 className="product__title">{cake.name}</h3>
-                                                <div className="product__description">{cake.description}</div>
-                                            </div>
-                                            <div className="product__content">
-                                                <div>
-                                                    <span className="product__price">Giá: 
-                                                    {cake.list_size[0].old_price !== null && (
-                                                        <span className="product__old--price">{cake.list_size[0].old_price} VND</span>
-                                                    )} {cake.list_size[0].price} VND</span>
-                                                    <div  className="product__size">
-                                                        <h3>Kích thước</h3>
-                                                        <div className="product__size--info">
-                                                            {cake.list_size.map((size,i)=>  (<div key={i}>{size.size}</div>)
-                                                            )}
-                                                        </div>
-                                                    </div>
-                                                    <div className="btn__add--cart">
-                                                        <button className="btn__cart">Thêm vào giỏ hàng</button>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </SwiperSlide>
+                            {cakes?.map((cake,i)=>
+                            {                  
+                              return(
+                                <>
+                                  <SwiperSlide key={i}>
+                                      <ProductItem cake={cake} key={i} handleAddToCart={handleAddToCart}/>
+                                  </SwiperSlide>
+                                  
+                                </>
                                 
-                            ))} 
-                            
+                              ) 
+                            }
+                              
+                            )} 
                             <div className="three__dot">...</div>
                             
 
