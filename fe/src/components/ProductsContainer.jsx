@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react";
 import Products from "./Products";
 import { getAllTypes } from "../services/type";
+import Cart from "./Cart";
 
 const ProductsContainer = () => {
     const [types,setTypes] = useState([]);
+    const [openCart, setOpenCart] = useState(true);
+    const [changeCart, setChangeCart] = useState(false);
+    const handleIsCart = () => {
+      setOpenCart(!openCart);
+    }
+    const handleOpenCart = () => {
+      setChangeCart(!changeCart);
+    }
     useEffect(()=>{
         const fetchData = async () => {
             try {
@@ -22,17 +31,22 @@ const ProductsContainer = () => {
           fetchData();
     },[])
   return (
+    <>
+    <Cart openCart={openCart} changeCart={changeCart} handleIsCart={handleIsCart}/>
     <div className="category__cake">
         {
             types.length !==0 && 
             types.map((type,i) =>(
                 <>
-                    <Products type={type} key={i} />
+                    <Products handleOpenCart={handleOpenCart} type={type} key={i} />
                 </>
                 )
             )
         }
     </div>
+    
+    </>
+    
   )
 }
 

@@ -408,6 +408,7 @@ body::-webkit-scrollbar-thumb {
 }
 .section--basic {
 	padding: 110px 0;
+	padding-bottom: 20px;
 }
 
 /* Section Tittle */
