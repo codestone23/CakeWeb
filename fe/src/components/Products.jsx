@@ -17,8 +17,21 @@ const Products = ({handleOpenCart,type}) => {
       const relCake = cake;
       relCake["quantity"] = quantity;
       relCake["moreInfo"] = moreInfo;
-      console.log(relCake);
-      cart.push(relCake);
+      
+      let first = true;
+      for(let i in cart){
+        console.log({relCake,i});
+        if(cart[i].name === relCake.name && cart[i].moreInfo.size === relCake.moreInfo.size){
+          console.log("oikokoko");
+          let quantityItem = cart[i].quantity + relCake.quantity;
+          cart[i]["quantity"] = quantityItem;
+          first = false;
+          break;
+        }
+      }
+      if (first) {
+        cart.push(relCake);
+      }
       localStorage.setItem("cart",JSON.stringify(cart));
       handleOpenCart();
    }

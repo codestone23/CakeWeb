@@ -1,6 +1,7 @@
 import React from 'react'
 import { Fragment } from "react"
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function Header() {
     function smoothScroll(target1, duration) {
@@ -75,7 +76,8 @@ function Header() {
     <div className="cakes__header">
         <div className="cakes__header--content">
             <div className="cakes__header--content__image">
-                <img className="image__logo" src="src/assets/images/logocake.png" alt="" />
+                <Link to="./homepage" ><img className="image__logo" src="src/assets/images/logocake.png" alt="" /></Link>
+                
             </div>
             <div className="cakes__header--content__body">
                 <div className="cakes__header--content__category">

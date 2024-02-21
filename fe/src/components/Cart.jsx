@@ -1,29 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { GiMilkCarton } from "react-icons/gi";
 import { FaRegTrashCan } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Cart = ({openCart,handleIsCart,changeCart}) => {
     // const [openCart, setOpenCart] = useState(true);
     const [cart,setCart] = useState(JSON.parse(localStorage.getItem('cart')) || []);
     const [totalPrice,setTotalPrice] = useState(0);
+    const [totalProducts,setTotalProducts] = useState(0);
     const handleOpenCart2 = () => {
         console.log(openCart);
         // setOpenCart(!openCart);
         setCart(JSON.parse(localStorage.getItem('cart'))|| []);
         handleIsCart();
+        handleChangeTotalPrice(cart);
     }
     useEffect(()=>{
         setCart(JSON.parse(localStorage.getItem('cart'))|| []);
-        handleChangeTotalPrice();
-    },[changeCart]);
+        handleChangeTotalPrice(JSON.parse(localStorage.getItem('cart')));
+    },[changeCart,totalPrice]);
     console.log(cart);
     useEffect(() => {
         window.addEventListener('storage', handleStorageChange);
         setCart(JSON.parse(localStorage.getItem('cart'))|| []);
+        handleChangeTotalPrice(JSON.parse(localStorage.getItem('cart')));
         return () => {
           window.removeEventListener('storage', handleStorageChange);
         }
-      }, [localStorage]); 
+      }, [localStorage,totalPrice]); 
       
       const handleStorageChange = () => {
         setCart(JSON.parse(localStorage.getItem('cart')));
@@ -34,21 +38,23 @@ const Cart = ({openCart,handleIsCart,changeCart}) => {
         setCart(ans);
         console.log(ans);
         localStorage.setItem("cart",JSON.stringify(ans));
-        handleChangeTotalPrice();
+        handleChangeTotalPrice(ans);
     }
-    const handleChangeTotalPrice = () => {
+    const handleChangeTotalPrice = (a) => {
         let total = 0;
-        cart.forEach((e) => {
-            total += e.moreInfo.price;
+        let totalCakes = 0;
+        a?.forEach((e) => {
+            total += e.moreInfo.price*e.quantity;
+            totalCakes += e.quantity;
         });
         setTotalPrice(total);
-        console.log(total);
+        setTotalProducts(totalCakes);
     }
 
   return (
     <div className="cart">
         <div className="cart__container" onClick={() => handleOpenCart2()}>
-            <span className="cart__number">{cart.length}</span>
+            <span className="cart__number">{totalProducts}</span>
             <GiMilkCarton />
         </div>
     
@@ -63,7 +69,7 @@ const Cart = ({openCart,handleIsCart,changeCart}) => {
                 </li>
                 <li className="list-group-item divider"></li>
                 <li className="list-group-item item">
-                    {cart.map((item,index)=>(
+                    {cart?.map((item,index)=>(
                         <>
                             <div key={index} className="item__container">
                                 <div>
@@ -90,6 +96,11 @@ const Cart = ({openCart,handleIsCart,changeCart}) => {
                         </>
                         
                     ))}
+                    {cart.length == 0 && (
+                        <div className="cart__no--product">
+                            <img className="no__product" src="src/assets/images/nocake.png" alt="not found" />
+                        </div>
+                    )}
                 
                 </li>
                 <li className="list-group-item divider-1"></li>
@@ -98,8 +109,9 @@ const Cart = ({openCart,handleIsCart,changeCart}) => {
                     <span className="tright">{totalPrice + " VNĐ"}</span>
                 </li>
                 <li className="list-group-item butn">
-                    <a href="" className="btn btn-checkout">
-                        Thanh Toán
+                    
+                    <a href="./payment" className="btn btn-checkout">
+                        <Link to="./payment">Thanh Toán</Link>
                     </a>
                 </li>
             </ul>

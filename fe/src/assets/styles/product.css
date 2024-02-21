@@ -388,8 +388,9 @@
     font-family: GeometricExtraBold;
     font-size: 18px;
 }
-.btn-checkout:hover{
-    color:  #fff;
+.cart .btn-checkout:hover{
+    background-color:#e38db1;
+    color: #dad8d8;
 }
 .swiper-pagination{
     margin-top: 10px;
@@ -541,4 +542,15 @@
     display: flex;
     font-size: medium;
     justify-content: space-between;
+  }
+
+  .cart__no--product{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .no__product{
+    width: 150px;
+
   }
