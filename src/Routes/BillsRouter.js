@@ -23,6 +23,8 @@ router.get('/getByIdClient', async (req, res) => {
     });
 });
 
+
+
 router.get('/getByDeliveryDate', async (req, res) => {
     const startDate = new Date(req.query.startDate);
     const endDate = new Date(req.query.endDate);

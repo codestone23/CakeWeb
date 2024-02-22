@@ -50,7 +50,8 @@ const BillsController = {
         if(bills == null) return responseObj(404, "Bill is not exist", null);
         const orders = await OrdersService.getOrderByIdBill(id);
         const cakeSizes = await CakeSizesService.getAllSize();
-        return responseObj(200, "Success", await BillsController.mergerAttributes([bills], [orders], cakeSizes));
+        console.log(orders)
+        return responseObj(200, "Success", await BillsController.mergerAttributes([bills], orders, cakeSizes));
     },
     getBillByIdClient: async (id_client) => {
         const bills = await BillsService.getBillByIdClient(id_client);
