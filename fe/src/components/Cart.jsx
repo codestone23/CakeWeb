@@ -64,7 +64,7 @@ const Cart = ({openCart,handleIsCart,changeCart}) => {
             <ul className="list-group">
                 <li className="list-group-item title">
                     GIỎ HÀNG (
-                    <span className="countProduct">{cart.length}</span>
+                    <span className="countProduct">{totalProducts}</span>
                     )
                 </li>
                 <li className="list-group-item divider"></li>
@@ -108,12 +108,25 @@ const Cart = ({openCart,handleIsCart,changeCart}) => {
                     <span className="tleft">Tổng cộng:</span>
                     <span className="tright">{totalPrice + " VNĐ"}</span>
                 </li>
-                <li className="list-group-item butn">
+                {
+                    totalPrice == 0 && (
+                        <li className="list-group-item butn">
+                            <button disabled className= "dis__link btn btn-checkout ">
+                                Thanh Toán
+                            </button>
+                        </li>
+                    )
+                }
+                {totalPrice != 0 && (
+                   <li className="list-group-item butn">
                     
-                    <a href="./payment" className="btn btn-checkout">
+                    <div href="#" className={totalProducts == 0 ? "btn btn-checkout dis__link" : "btn btn-checkout"}>
                         <Link to="./payment">Thanh Toán</Link>
-                    </a>
-                </li>
+                    </div>
+                </li> 
+                )}
+                
+                
             </ul>
         </div>
         

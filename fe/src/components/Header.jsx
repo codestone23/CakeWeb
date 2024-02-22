@@ -31,7 +31,6 @@ function Header() {
 
     useEffect(() => {
         const category = document.querySelector('div a[href="#category"]');
-        const footer = document.querySelector('div a[href="#footer"]');
         const footer1 = document.querySelector('div a[href="#footer1"]');
         const product = document.querySelector('div a[href="#product"]');
         const intro = document.querySelector('div a[href="#intro"]');
@@ -39,9 +38,6 @@ function Header() {
             smoothScroll('#category', 1500);
         });
 
-        footer.addEventListener('click', () => {
-            smoothScroll('#footer', 1500);
-        });
         footer1.addEventListener('click', () => {
             smoothScroll('#footer1', 1500);
         });
@@ -56,9 +52,6 @@ function Header() {
                 smoothScroll('#category', 1500);
             });
     
-            footer.addEventListener('click', () => {
-                smoothScroll('#footer', 1500);
-            });
             footer1.addEventListener('click', () => {
                 smoothScroll('#footer1', 1500);
             });
@@ -89,9 +82,10 @@ function Header() {
                     <div className="cakes__header--link">
                         <a href="#product">Sản phẩm</a></div>
                     <div className="cakes__header--link">
-                        <a href="#footer">Tư vấn</a></div>
-                    <div className="cakes__header--link">
                         <a href="#footer1">Liên hệ</a></div>
+                    <div className="cakes__header--link">
+                        <Link to="/search-order">Tra cứu đơn hàng</Link>
+                        </div>
                 </div>
             </div>
             

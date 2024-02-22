@@ -37,27 +37,31 @@ const Payment = () => {
       cart.map((e,i)=>{
         let rel = {};
         rel.id_cake = e.id;
+        rel.name_cake = e.name;
         rel.size = e.moreInfo.size;
         rel.quantity = e.quantity;
         list_order.push(rel);
       })
       values.list_order = list_order;
-      console.log(values);
       createTotalBill(values).then((response) => {
-        console.log(response);
+        console.log(response.data.data[0]);
         localStorage.removeItem("cart");
+        console.log( response.data );
         if (response.data === null) {
-          // 
+          console.log("error");
+          // navigate("/homepage");
         } else {
-          // 
+          const billData = response.data.data[0]; 
+          localStorage.setItem("bill",JSON.stringify(response.data.data[0]));
+          navigate("/show-bill");
         }
-        navigate("/homepage");
       })
     },
   });
 
   return (
     <main className="payment">
+       <div className="search__order--title">Thanh toán hóa đơn</div>
       <div className="payment__container">
         <div className="payment__container--form">
           <div className="payment__container--form__body">
@@ -139,10 +143,6 @@ const Payment = () => {
                     )
                   })}
             </div>
-                  
-                  
-                
-                
                 <li className="list-group-item divider-1"></li>
                 <li className="list-group-item text-1">
                     <span className="title-3">Đơn hàng</span>
