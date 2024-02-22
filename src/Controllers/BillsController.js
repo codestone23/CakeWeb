@@ -50,7 +50,6 @@ const BillsController = {
         if(bills == null) return responseObj(404, "Bill is not exist", null);
         const orders = await OrdersService.getOrderByIdBill(id);
         const cakeSizes = await CakeSizesService.getAllSize();
-        console.log(orders)
         return responseObj(200, "Success", await BillsController.mergerAttributes([bills], orders, cakeSizes));
     },
     getBillByIdClient: async (id_client) => {
@@ -117,7 +116,7 @@ const BillsController = {
 
         bill = await BillsService.createBill(bill)
             
-            // create orde
+            // create order
         const listOrder = totalBill.list_order;
         listOrder.forEach(order => {
             const newOrder = {
@@ -128,7 +127,37 @@ const BillsController = {
             }
             OrdersService.createOrder(newOrder);
         });
-        return responseObj(200, "Success", null);
+
+        const cakeSizes = await CakeSizesService.getAllSize();
+
+        let rs = []
+        const newBill = {
+            id: bill.id,
+            id_client: bill.id_client,
+            notice: bill.notice,
+            delivery_date: bill.delivery_date,
+            created_date: bill.created_at,
+            updated_date: bill.updated_at,
+            list_order: [],
+            total_price: 0,
+            total_old_price: 0
+        };
+        listOrder.forEach(async order => {
+            const size = cakeSizes.find(size => size.id_cake == order.id_cake && size.size == order.size);
+            newBill.list_order.push({
+                id: order.id,
+                id_cake: order.id_cake,
+                size: order.size,
+                quantity: order.quantity,
+                price: size.price,
+                old_price: size.old_price
+            });
+            newBill.total_price += size.price * order.quantity;
+            newBill.total_old_price += size.old_price * order.quantity;
+        });
+        rs.push(newBill);
+
+        return responseObj(200, "Success", rs);
     },
 
     createBill: async (bill) => {
